@@ -1,2 +1,3 @@
-# gdi-domain-events
-Talk in Garageje de Ideas about Domain Events
+# Garaje de Ideas - Eventos de Dominio
+
+Material de apoyo para el live coding para Garaje de ideas sobre Eventos de Dominio.
