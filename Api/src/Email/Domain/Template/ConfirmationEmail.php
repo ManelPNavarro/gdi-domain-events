@@ -1,6 +1,6 @@
 <?php
 
-namespace Gdi\Api\Communication\Domain\Email;
+namespace Gdi\Api\Email\Domain\Template;
 
 final readonly class ConfirmationEmail implements EmailTemplate
 {

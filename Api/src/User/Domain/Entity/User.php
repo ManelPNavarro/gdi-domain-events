@@ -6,10 +6,8 @@ namespace Gdi\Api\User\Domain\Entity;
 
 use Gdi\Api\User\Domain\ValueObject\UserEmail;
 use Gdi\Api\User\Domain\ValueObject\UserId;
-use Gdi\Api\User\Domain\ValueObject\UserName;
-use Gdi\Api\User\Domain\ValueObject\UserPasswordHash;
 
-final class User
+final readonly class User
 {
     public function __construct(
         private UserId $id,
@@ -25,5 +23,15 @@ final class User
             $id,
             $email
         );
+    }
+
+    public function id(): UserId
+    {
+        return $this->id;
+    }
+
+    public function email(): UserEmail
+    {
+        return $this->email;
     }
 }

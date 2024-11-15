@@ -1,6 +1,6 @@
 <?php
 
-namespace Gdi\Api\Communication\Application;
+namespace Gdi\Api\Email\Application;
 
 use Gdi\Api\Communication\Domain\Email\WelcomeEmail;
 use Gdi\Api\Communication\Domain\Service\EmailService;
