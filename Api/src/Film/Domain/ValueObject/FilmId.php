@@ -1,6 +1,6 @@
 <?php
 
-namespace Gdi\Backoffice\Film\Domain\ValueObject;
+namespace Gdi\Api\Film\Domain\ValueObject;
 
 use Gdi\Shared\Domain\ValueObject\Uuid;
 
