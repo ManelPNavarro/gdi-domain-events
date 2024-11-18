@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Gdi\Api\User\Infrastructure\Persistence\Doctrine\Repository;
+namespace Gdi\Api\User\Infrastructure\Persistence\MySql\Repository;
 
-use Gdi\Api\User\Domain\Repository\UserWriteRepository;
 use Gdi\Api\User\Domain\Entity\User;
+use Gdi\Api\User\Domain\Repository\UserWriteRepository;
 use Gdi\Shared\Infrastructure\Persistence\Doctrine\DoctrinePostgresRegistry;
 
-final readonly class DoctrineUserWriteRepository implements UserWriteRepository
+final readonly class MySqlUserWriteRepository implements UserWriteRepository
 {
     public function __construct(
         private DoctrinePostgresRegistry $registry,
