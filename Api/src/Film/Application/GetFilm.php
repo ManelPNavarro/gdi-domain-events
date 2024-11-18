@@ -9,7 +9,7 @@ use Gdi\Api\Film\Domain\ValueObject\FilmId;
 
 final readonly class GetFilm
 {
-    public function __construct(private readonly FilmReadRepository $filmReadRepository)
+    public function __construct(private FilmReadRepository $filmReadRepository)
     {
     }
 

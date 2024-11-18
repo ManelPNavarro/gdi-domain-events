@@ -2,23 +2,24 @@
 
 namespace Gdi\Api\User\Domain\Event;
 
-use Gdi\Shared\Domain\Event\DomainEvent;
+use Gdi\Shared\Domain\Event\ApiDomainEvent;
 
-final readonly class UserWasCreated implements DomainEvent
+final class UserWasCreated extends ApiDomainEvent
 {
     public function __construct(
         public string $userId,
         public string $userEmail
     ) {
+        parent::__construct();
     }
 
-    public static function name(): string
+    public static function eventName(): string
     {
         return 'user.created';
     }
 
-    public function occurredOn(): int
+    protected static function version(): int
     {
-        return time();
+        return 1;
     }
 }
