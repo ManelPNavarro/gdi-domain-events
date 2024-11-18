@@ -10,6 +10,6 @@ Este proyecto no es funcional y hay partes no implementadas, su intención es se
 
 En este proyecto encontrarás 3 ramas:
 
-- **main** con el resultado final después del live coding.
-- **before-refactor** con el proyecto antes de ser refactorizado en el live coding, sin eventos de dominio.
-- **after-refactor** con el proyecto refactorizado usando eventos de dominio (elm mismo contenido que en main).
+- **main**: con el resultado final después del live coding.
+- **before-refactor**: con el proyecto antes de ser refactorizado en el live coding, sin eventos de dominio.
+- **after-refactor**: con el proyecto refactorizado usando eventos de dominio (el mismo contenido que en la rama main).

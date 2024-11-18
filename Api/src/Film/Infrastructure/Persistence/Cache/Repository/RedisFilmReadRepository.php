@@ -18,7 +18,7 @@ final readonly class RedisFilmReadRepository implements FilmReadRepository
     private const int ONE_HOUR_IN_SECONDS = 3600;
 
     public function __construct(
-        private FilmReadRepository $doctrineFilmReadRepository,
+        private FilmReadRepository $mySqlFilmReadRepository,
         private CacheReadRepository $cacheReadRepository,
         private CacheWriteRepository $cacheWriteRepository,
     ) {
@@ -35,7 +35,7 @@ final readonly class RedisFilmReadRepository implements FilmReadRepository
         $film = $this->cacheReadRepository->get($redisKey);
 
         if ($film === null) {
-            $film = $this->doctrineFilmReadRepository->ofIdOrFail($id);
+            $film = $this->mySqlFilmReadRepository->ofIdOrFail($id);
 
             $this->cacheWriteRepository->set($redisKey, $film, self::ONE_HOUR_IN_SECONDS);
         }

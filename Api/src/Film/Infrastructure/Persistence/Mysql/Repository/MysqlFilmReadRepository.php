@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Gdi\Backoffice\Film\Infrastructure\Persistence\Doctrine\Repository;
+namespace Gdi\Api\Film\Infrastructure\Persistence\Mysql\Repository;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Gdi\Backoffice\Film\Domain\Entity\Film;
-use Gdi\Backoffice\Film\Domain\Exception\FilmNotFound;
-use Gdi\Backoffice\Film\Domain\Repository\FilmReadRepository;
-use Gdi\Backoffice\Film\Domain\ValueObject\FilmId;
+use Gdi\Api\Film\Domain\Entity\Film;
+use Gdi\Api\Film\Domain\Exception\FilmNotFound;
+use Gdi\Api\Film\Domain\Repository\FilmReadRepository;
+use Gdi\Api\Film\Domain\ValueObject\FilmId;
 use Gdi\Shared\Infrastructure\Persistence\Doctrine\DoctrinePostgresRegistry;
 
-final readonly class DoctrineFilmReadRepository implements FilmReadRepository
+final readonly class MysqlFilmReadRepository implements FilmReadRepository
 {
     public function __construct(
         private DoctrinePostgresRegistry $registry,
