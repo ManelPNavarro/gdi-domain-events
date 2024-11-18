@@ -19,6 +19,15 @@ final readonly class UserProfile
     ) {
     }
 
+    public static function create(
+        UserProfileId $id,
+        UserId $userId,
+        UserProfileName $name,
+        bool $isMain
+    ): self {
+        return new self($id, $userId, $name, $isMain);
+    }
+
     /**
      * @throws EmptyString
      */
@@ -26,7 +35,7 @@ final readonly class UserProfile
         UserProfileId $id,
         UserId $userId
     ): self {
-        return new self(
+        return self::create(
             $id,
             $userId,
             UserProfileName::defaultMain(),
