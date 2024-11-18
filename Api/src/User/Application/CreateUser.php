@@ -2,6 +2,8 @@
 
 namespace Gdi\Api\User\Application;
 
+use Gdi\Api\Crm\Domain\Dto\CrmUserDto;
+use Gdi\Api\Crm\Domain\Repository\CrmWriteRepository;
 use Gdi\Api\Email\Domain\Template\ConfirmationEmail;
 use Gdi\Api\Email\Domain\Template\WelcomeEmail;
 use Gdi\Api\Email\Domain\Service\EmailService;
@@ -13,12 +15,14 @@ use Gdi\Api\User\Domain\ValueObject\UserEmail;
 use Gdi\Api\User\Domain\ValueObject\UserId;
 use Gdi\Api\User\Domain\ValueObject\UserProfileId;
 use Gdi\Shared\Domain\Exception\EmptyString;
+use Gdi\Shared\Domain\ValueObject\Uuid;
 
 final readonly class CreateUser
 {
     public function __construct(
         private UserWriteRepository $userWriteRepository,
         private UserProfileWriteRepository $userProfileWriteRepository,
+        private CrmWriteRepository $crmWriteRepository,
         private EmailService $emailService
     ) {
     }
@@ -26,25 +30,27 @@ final readonly class CreateUser
     /**
      * @throws EmptyString
      */
-    public function __invoke(UserEmail $userEmail): void
+    public function __invoke(UserEmail $email): void
     {
-        $userId = $this->createUserReturnId($userEmail);
-        $this->createDefaultMainProfile($userId);
+        $user = $this->createUser($email);
+        $this->createDefaultMainProfile($user->id());
 
-        $this->sendWelcomeEmail($userEmail);
-        $this->sendConfirmationEmail($userEmail);
+        $this->createCrmUser($user);
+
+        $this->sendWelcomeEmail($user->email());
+        $this->sendConfirmationEmail($user->email());
     }
 
-    private function createUserReturnId(UserEmail $userEmail): UserId
+    private function createUser(UserEmail $email): User
     {
         $user = User::create(
-            UserId::random(),
-            $userEmail
+            UserId::create(Uuid::random()->value()),
+            $email
         );
 
         $this->userWriteRepository->create($user);
 
-        return $user->id();
+        return $user;
     }
 
     /**
@@ -53,11 +59,21 @@ final readonly class CreateUser
     private function createDefaultMainProfile(UserId $userId): void
     {
         $userProfile = UserProfile::createDefaultMain(
-            UserProfileId::random(),
+            UserProfileId::create(Uuid::random()->value()),
             $userId
         );
 
         $this->userProfileWriteRepository->create($userProfile);
+    }
+
+    private function createCrmUser(User $user): void
+    {
+        $crmUserDto = new CrmUserDto(
+            $user->id(),
+            $user->email()
+        );
+
+        $this->crmWriteRepository->createUser($crmUserDto);
     }
 
     private function sendWelcomeEmail(UserEmail $userEmail): void

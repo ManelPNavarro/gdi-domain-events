@@ -38,5 +38,11 @@
       "Gdi\\Backoffice\\": "Backoffice/src/",
       "Gdi\\Shared\\": "Shared/src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Gdi\\Api\\Tests\\Unit\\": "Api/tests/Unit/",
+      "Gdi\\Api\\Tests\\Mock\\": "Api/tests/Mock/"
+    }
   }
 }
