@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Gdi\Shared\Domain\Event;
 
+use JsonSerializable;
+
 use function sprintf;
 
-abstract class ApiDomainEvent implements DomainEvent
+abstract class ApiDomainEvent implements DomainEvent, JsonSerializable
 {
     private const string NAME_PREFIX = 'gdi.api.domain_event';
 

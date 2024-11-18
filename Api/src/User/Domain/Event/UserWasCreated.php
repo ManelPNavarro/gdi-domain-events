@@ -22,4 +22,15 @@ final class UserWasCreated extends ApiDomainEvent
     {
         return 1;
     }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'eventName' => self::eventName(),
+            'version' => self::version(),
+            'userId' => $this->userId,
+            'userEmail' => $this->userEmail,
+            'occurredOn' => $this->occurredOn,
+        ];
+    }
 }

@@ -21,4 +21,14 @@ final class FilmWasUpdated extends BackofficeDomainEvent
     {
         return 1;
     }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'eventName' => self::eventName(),
+            'version' => self::version(),
+            'filmId' => $this->filmId,
+            'occurredOn' => $this->occurredOn,
+        ];
+    }
 }

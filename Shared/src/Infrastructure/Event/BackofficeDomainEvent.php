@@ -6,9 +6,11 @@ namespace Gdi\Shared\Infrastructure\Event;
 
 use Gdi\Shared\Domain\Event\DomainEvent;
 
+use JsonSerializable;
+
 use function sprintf;
 
-abstract class BackofficeDomainEvent implements DomainEvent
+abstract class BackofficeDomainEvent implements DomainEvent, JsonSerializable
 {
     private const string NAME_PREFIX = 'gdi.backoffice.domain_event';
 
