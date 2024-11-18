@@ -15,5 +15,6 @@ En este proyecto encontrarás 3 ramas:
 - **after-refactor** con el proyecto refactorizado usando eventos de dominio (elm mismo contenido que en main).
 
 
+TODO: explicit event serialization?
 TODO: recorder/suscriber config
 TODO: rabbit config

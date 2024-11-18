@@ -28,20 +28,20 @@ final class CreateUserTest extends TestCase
     {
         parent::setUp();
 
-        $this->userRepository = new InMemoryUserWriteRepository();
+        $this->userWriteRepository = new InMemoryUserWriteRepository();
         $this->userProfileWriteRepository = new InMemoryUserProfileWriteRepository();
         $this->crmWriteRepository = new InMemoryCrmWriteRepository();
         $this->emailService = new InMemoryEmailService();
 
         $this->createUser = new CreateUser(
-            $this->userRepository,
+            $this->userWriteRepository,
             $this->userProfileWriteRepository,
             $this->crmWriteRepository,
             $this->emailService
         );
     }
 
-    public function testThatUserIsCrated(): void
+    public function testThatUserIsCreated(): void
     {
         $userEmail = UserEmail::create(self::USER_EMAIL);
 
@@ -65,8 +65,8 @@ final class CreateUserTest extends TestCase
         $createdUser = reset($this->userWriteRepository->users);
         $createdUserProfile = $this->userProfileWriteRepository->userProfiles[$createdUser->id()->value()];
 
+        self::assertEquals($createdUser->id(), $createdUserProfile->userId());
         self::assertEquals(UserProfileName::defaultMain(), $createdUserProfile->name());
-        self::assertEquals($userEmail, $createdUserProfile->email);
         self::assertTrue($createdUserProfile->isMain());
     }
 
